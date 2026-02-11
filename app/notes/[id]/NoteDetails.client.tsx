@@ -11,6 +11,7 @@ export default function NoteDetailsClient() {
   const { data: note, isLoading, isError } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id as string),
+    refetchOnMount: false,
   });
 
   if (isLoading) {
@@ -29,7 +30,7 @@ export default function NoteDetailsClient() {
         <p className={css.tag}>{note.tag}</p>
         <p className={css.content}>{note.content}</p>
         <p className={css.date}>
-          {note.createdAt ? new Date(note.createdAt).toLocaleDateString() : "No date"}
+          {new Date(note.createdAt).toLocaleDateString()}
         </p>
       </div>
     </div>
